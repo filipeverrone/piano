@@ -1,7 +1,7 @@
 import { CSSProperties } from "react";
 
 const styles = (): { [key: string]: CSSProperties } => ({
-  oitava: {
+  octave: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',

@@ -7,19 +7,19 @@ import { KeyboardNote } from '../../pages/Piano/interfaces';
 interface Props {
   keyNote: string;
   harm: string;
-  oitava: KeyboardNote[];
+  octave: KeyboardNote[];
   volume: number;
 }
 
-const Oitava: React.FC<Props> = ({ keyNote, harm, oitava, volume }) => {
-  const oitavaId = `oitava${harm}`;
+const Octave: React.FC<Props> = ({ keyNote, harm, octave, volume }) => {
+  const octaveId = `octave${harm}`;
   
   return (
     <Grid container xs={12}>
-      <Grid id={oitavaId} container className="oitava">
-        {oitava?.map((note, index) => (
+      <Grid id={octaveId} container className="octave">
+        {octave?.map((note, index) => (
           <Grid item key={index}>
-            <KeyNote {...note} keynote={keyNote} key={index} oitavaId={oitavaId} volume={volume} />
+            <KeyNote {...note} keynote={keyNote} key={index} octaveId={octaveId} volume={volume} />
           </Grid>
         ))}
       </Grid>
@@ -27,4 +27,4 @@ const Oitava: React.FC<Props> = ({ keyNote, harm, oitava, volume }) => {
   );
 };
 
-export default Oitava;
+export default Octave;

@@ -7,11 +7,11 @@ import useWindowSize, { Size } from '../../hooks/useWindowSize';
 
 interface Props extends KeyboardNote {
   keynote: string;
-  oitavaId: string;
+  octaveId: string;
   volume: number;
 }
 
-const KeyNote: React.FC<Props> = ({ src, keyboard, label, keynote, oitavaId, volume }) => {
+const KeyNote: React.FC<Props> = ({ src, keyboard, label, keynote, octaveId, volume }) => {
   const audio = React.useMemo(() => new Howl({src, volume: volume / 100}), [src, volume]);
 
   const [, setClassName] = React.useState<string>('unpressed');
@@ -49,16 +49,16 @@ const KeyNote: React.FC<Props> = ({ src, keyboard, label, keynote, oitavaId, vol
 
   const buttonStyle = increment(label.replace(/\d/g, ''));
 
-  const oitava = document.getElementById(oitavaId);
+  const octave = document.getElementById(octaveId);
 
   const [left, setLeft] = React.useState<string>(
-    `${(oitava?.offsetLeft || 0) + 22 * (buttonStyle + 1) + 11 * buttonStyle}px`
+    `${(octave?.offsetLeft || 0) + 22 * (buttonStyle + 1) + 11 * buttonStyle}px`
   );
   const size: Size = useWindowSize();
 
   React.useEffect(() => {
-    setLeft(`${(oitava?.offsetLeft || 0) + 22 * (buttonStyle + 1) + 11 * buttonStyle}px`);
-  }, [buttonStyle, oitava?.offsetLeft, size]);
+    setLeft(`${(octave?.offsetLeft || 0) + 22 * (buttonStyle + 1) + 11 * buttonStyle}px`);
+  }, [buttonStyle, octave?.offsetLeft, size]);
 
   return (
     <button
