@@ -17,7 +17,7 @@ const KeyNote: React.FC<Props> = ({ src, keyboard, label, keynote, volume, isBla
   React.useEffect(() => {
     howlRef.current = new Howl({
       src: [src],
-      volume: volume / 100,
+      volume: 1,
       preload: true,
     });
     return () => {
