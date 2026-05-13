@@ -40,7 +40,7 @@ const Piano: React.FC<Props> = ({ volume }) => {
       return;
     }
     event.preventDefault();
-    setKey(event.key);
+    setKey(keyToNote[pressedKey]);
   }, [keyToNote]);
 
   const handleKeyUp = React.useCallback((event: KeyboardEvent) => {

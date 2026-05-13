@@ -35,7 +35,7 @@ const Octave: React.FC<Props> = ({ keyNote, harm, octave, volume }) => {
           <KeyNote {...note} keynote={keyNote} key={note.label} volume={volume} />
         ))}
       </div>
-      <div className="black-keys" aria-hidden>
+      <div className="black-keys" aria-hidden="true">
         {blackKeys.map((note) => {
           const noteName = note.label.replace(/[0-9]/g, '');
           const offset = blackOffsets[noteName];
