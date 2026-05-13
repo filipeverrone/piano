@@ -22,7 +22,7 @@
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "orientation": "portrait-primary",
+  "orientation": "any",
   "theme_color": "#1f1f1f",
   "background_color": "#111111"
 }

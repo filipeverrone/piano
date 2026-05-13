@@ -2,8 +2,6 @@ import React from 'react';
 import Octave from '../../components/Octave';
 import { getNotesByOctaveId } from './utils';
 
-const NON_PRINTABLE_HOTKEYS = ['ø'];
-
 interface Props {
   volume: number;
 }
@@ -23,7 +21,7 @@ const Piano: React.FC<Props> = ({ volume }) => {
     octaves.forEach(({ notes }) => {
       notes.forEach((note) => {
         const hotkey = note.keyboard?.toLowerCase();
-        if (!hotkey || NON_PRINTABLE_HOTKEYS.includes(hotkey)) {
+        if (!hotkey || hotkey === 'ø') {
           return;
         }
         map[hotkey] = note.keyboard;
@@ -34,7 +32,7 @@ const Piano: React.FC<Props> = ({ volume }) => {
 
   const handleKeyDown = React.useCallback((event: KeyboardEvent) => {
     const { altKey, ctrlKey, shiftKey } = event;
-    if ([altKey, ctrlKey, shiftKey].includes(true)) {
+    if (altKey || ctrlKey || shiftKey) {
       return;
     }
     const pressedKey = event.key.toLowerCase();

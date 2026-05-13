@@ -3,8 +3,6 @@ import './piano.css';
 import { Howl } from 'howler';
 import { KeyboardNote } from '../../pages/Piano/interfaces';
 
-const NON_PRINTABLE_HOTKEYS = ['ø', 'Dead'];
-
 interface Props extends KeyboardNote {
   keynote: string;
   volume: number;
@@ -42,7 +40,7 @@ const KeyNote: React.FC<Props> = ({ src, keyboard, label, keynote, volume, isBla
     }
   }, [isPressed, play]);
 
-  const hotkeyText = keyboard && !NON_PRINTABLE_HOTKEYS.includes(keyboard) ? keyboard.toUpperCase() : '';
+  const hotkeyText = keyboard && keyboard !== 'ø' && keyboard.length === 1 ? keyboard.toUpperCase() : '';
 
   return (
     <button
