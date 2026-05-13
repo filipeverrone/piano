@@ -1,6 +1,6 @@
 # Piano Online Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Online piano web app with desktop keyboard support, mobile touch support, and installable PWA behavior.
 
 ## Available Scripts
 
@@ -8,7 +8,7 @@ In the project directory, you can run:
 
 ### `npm start`
 
-Runs the app in the development mode.\
+Runs the app in development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
@@ -28,6 +28,14 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+## Features
+
+- Play notes with mouse/trackpad and touch.
+- Play notes from your physical keyboard (desktop/laptop).
+- Adjustable volume slider.
+- Responsive keyboard layout with horizontal scroll on small screens.
+- Installable as a PWA on supported browsers.
 
 ### `npm run eject`
 

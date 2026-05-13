@@ -1,6 +1,7 @@
 {
   "short_name": "Piano",
-  "name": "Piano React App",
+  "name": "Piano Online",
+  "description": "Playable online piano with desktop keyboard and mobile touch support.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -18,8 +19,10 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "orientation": "portrait-primary",
+  "theme_color": "#1f1f1f",
+  "background_color": "#111111"
 }

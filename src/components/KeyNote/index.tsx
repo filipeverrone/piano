@@ -1,73 +1,67 @@
 import React from 'react';
 import './piano.css';
 import { Howl } from 'howler';
-import styles from './styles';
 import { KeyboardNote } from '../../pages/Piano/interfaces';
-import useWindowSize, { Size } from '../../hooks/useWindowSize';
 
 interface Props extends KeyboardNote {
   keynote: string;
-  octaveId: string;
   volume: number;
+  isBlack?: boolean;
+  left?: string;
 }
 
-const KeyNote: React.FC<Props> = ({ src, keyboard, label, keynote, octaveId, volume }) => {
-  const audio = React.useMemo(() => new Howl({src, volume: volume / 100}), [src, volume]);
-
-  const [, setClassName] = React.useState<string>('unpressed');
-  const getClassName = (press: boolean): string => `${press ? 'pressed' : 'unpressed'} button`;
-  
-  const play = React.useCallback(() => {
-    audio.play();
-    setClassName(getClassName(true))
-  }, [audio]);
-
-  const handleClick = () => {
-    play();
-  };
-
-  const handleMouseUp = () => {
-    setClassName(getClassName(false));
-  };
+const KeyNote: React.FC<Props> = ({ src, keyboard, label, keynote, volume, isBlack = false, left }) => {
+  const howlRef = React.useRef<Howl | null>(null);
+  const isPressed = keynote?.toLowerCase() === keyboard?.toLowerCase();
 
   React.useEffect(() => {
-    if (keynote?.toUpperCase() === keyboard?.toUpperCase()) {
+    howlRef.current = new Howl({
+      src: [src],
+      volume: volume / 100,
+      preload: true,
+    });
+    return () => {
+      howlRef.current?.unload();
+      howlRef.current = null;
+    };
+  }, [src]);
+
+  React.useEffect(() => {
+    if (howlRef.current) {
+      howlRef.current.volume(volume / 100);
+    }
+  }, [volume]);
+
+  const play = React.useCallback(() => {
+    if (!howlRef.current) {
+      return;
+    }
+    howlRef.current.stop();
+    howlRef.current.play();
+  }, []);
+
+  React.useEffect(() => {
+    if (isPressed) {
       play();
     }
-    setClassName(getClassName(false));
-  }, [keynote, keyboard, play]);
+  }, [isPressed, play]);
 
-  const isBemol = label.includes('b');
-
-  const increment = (text: string): number => ({
-    'Db': 0,
-    'Eb': 1,
-    'Gb': 3,
-    'Ab': 4,
-    'Bb': 5,
-  }[text]) || 0;
-
-  const buttonStyle = increment(label.replace(/\d/g, ''));
-
-  const octave = document.getElementById(octaveId);
-
-  const [left, setLeft] = React.useState<string>(
-    `${(octave?.offsetLeft || 0) + 22 * (buttonStyle + 1) + 11 * buttonStyle}px`
-  );
-  const size: Size = useWindowSize();
-
-  React.useEffect(() => {
-    setLeft(`${(octave?.offsetLeft || 0) + 22 * (buttonStyle + 1) + 11 * buttonStyle}px`);
-  }, [buttonStyle, octave?.offsetLeft, size]);
+  const hotkeyText = keyboard && !['ø', 'Dead'].includes(keyboard) ? keyboard.toUpperCase() : '';
 
   return (
     <button
-      className={isBemol ? '' : 'whiteKey'}
-      onClick={handleClick}
-      onMouseUp={handleMouseUp}
-      style={isBemol ? styles(left)?.blackKey : {}}
+      className={`piano-key ${isBlack ? 'black-key' : 'white-key'} ${isPressed ? 'active' : ''}`}
+      onPointerDown={play}
+      style={isBlack && left ? { left } : undefined}
+      aria-label={`Play note ${label}`}
+      type="button"
     >
-      {!isBemol && <div>{label}</div>}
+      {!isBlack && (
+        <>
+          <span className="label">{label}</span>
+          {hotkeyText && <span className="hotkey">{hotkeyText}</span>}
+        </>
+      )}
     </button>
   );
 };
