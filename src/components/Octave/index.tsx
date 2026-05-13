@@ -3,6 +3,14 @@ import './piano.css';
 import KeyNote from '../KeyNote';
 import { KeyboardNote } from '../../pages/Piano/interfaces';
 
+const BLACK_OFFSETS: Record<string, number> = {
+  Db: 0,
+  Eb: 1,
+  Gb: 3,
+  Ab: 4,
+  Bb: 5,
+};
+
 interface Props {
   keyNote: string;
   harm: string;
@@ -20,13 +28,6 @@ const Octave: React.FC<Props> = ({ keyNote, harm, octave, volume }) => {
     () => octave.filter((note) => note.label.includes('b')),
     [octave]
   );
-  const blackOffsets: Record<string, number> = {
-    Db: 0,
-    Eb: 1,
-    Gb: 3,
-    Ab: 4,
-    Bb: 5,
-  };
 
   return (
     <div id={octaveId} className="octave" data-octave={harm}>
@@ -38,7 +39,7 @@ const Octave: React.FC<Props> = ({ keyNote, harm, octave, volume }) => {
       <div className="black-keys" aria-hidden="true">
         {blackKeys.map((note) => {
           const noteName = note.label.replace(/[0-9]/g, '');
-          const offset = blackOffsets[noteName];
+          const offset = BLACK_OFFSETS[noteName];
           return (
             <KeyNote
               {...note}

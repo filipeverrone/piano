@@ -19,20 +19,14 @@ const KeyNote: React.FC<Props> = ({ src, keyboard, label, keynote, volume, isBla
   React.useEffect(() => {
     howlRef.current = new Howl({
       src: [src],
-      volume: 1,
+      volume: volume / 100,
       preload: true,
     });
     return () => {
       howlRef.current?.unload();
       howlRef.current = null;
     };
-  }, [src]);
-
-  React.useEffect(() => {
-    if (howlRef.current) {
-      howlRef.current.volume(volume / 100);
-    }
-  }, [volume]);
+  }, [src, volume]);
 
   const play = React.useCallback(() => {
     if (!howlRef.current) {
