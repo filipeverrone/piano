@@ -1,24 +1,55 @@
-.whiteKey { 
-  background-color: #fff;
-  height: 100%;
+.piano-key {
+  border: 1px solid #111;
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+  transition: background-color 0.08s ease, transform 0.08s ease;
+}
+
+.piano-key.active,
+.piano-key:active {
+  transform: translateY(2px);
+}
+
+.white-key {
+  background: linear-gradient(180deg, #ffffff 0%, #efefef 100%);
+  width: var(--white-key-width);
+  height: var(--white-key-height);
   display: flex;
-  align-items: center;
   flex-direction: column;
   justify-content: flex-end;
-  padding-bottom: 10px;
-  position: relative;
-  width: 100%;
-  overflow: hidden;
+  align-items: center;
+  padding: 0.5rem 0.2rem;
+  color: #111;
+  z-index: 1;
 }
 
-.whiteKey:active {
-  background-color: #aaa;
+.white-key.active,
+.white-key:active {
+  background: #d6d6d6;
 }
 
-.pressed {
-  background-color: #aaa !important;
+.black-key {
+  position: absolute;
+  top: 0;
+  width: var(--black-key-width);
+  height: var(--black-key-height);
+  background: linear-gradient(180deg, #333 0%, #0f0f0f 100%);
+  border-color: #000;
+  z-index: 2;
 }
 
-.unpressed {
-  background-color: #fff !important;
+.black-key.active,
+.black-key:active {
+  background: #444;
+}
+
+.label {
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.hotkey {
+  font-size: 0.65rem;
+  color: #5d5d5d;
 }

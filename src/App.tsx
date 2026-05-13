@@ -1,23 +1,25 @@
-import { Grid } from '@mui/material';
 import React from 'react';
+import type { SliderProps } from '@mui/material/Slider';
 import './App.css';
 import ContinuousSlider from './components/Slider';
 import Piano from './pages/Piano';
 
 const App: React.FC = () => {
-  const [value, setValue] = React.useState<number>(30);
+  const [value, setValue] = React.useState<number>(60);
 
-  const handleChange = (_: Event, newValue: number | number[]) => {
-    setValue(newValue as number);
+  const handleChange: NonNullable<SliderProps['onChange']> = (_, newValue) => {
+    setValue(Array.isArray(newValue) ? newValue[0] : newValue);
   };
 
   return (
-    <Grid className="App">
+    <main className="App">
       <header className="App-header">
+        <h1 className="App-title">Piano Online</h1>
+        <p className="App-subtitle">Play with your keyboard on desktop or tap keys on mobile.</p>
         <ContinuousSlider value={value} handleChange={handleChange} />
         <Piano volume={value} />
       </header>
-    </Grid>
+    </main>
   );
 }
 

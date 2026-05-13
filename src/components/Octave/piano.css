@@ -1,12 +1,29 @@
-.pressed {
-  background-color: #aaa !important;
+.octave {
+  --white-key-width: clamp(2rem, 4.8vw, 2.8rem);
+  --white-key-height: clamp(7.5rem, 18vw, 12.5rem);
+  --black-key-width: calc(var(--white-key-width) * 0.62);
+  --black-key-height: calc(var(--white-key-height) * 0.6);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: calc(var(--white-key-width) * 7);
+  height: var(--white-key-height);
+  box-sizing: border-box;
+  margin: 0 0.1rem;
 }
 
-.octave {
+.white-keys {
   display: flex;
-  direction: row;
-  justify-content: center;
-  min-width: 20% !important;
-  height: 130px;
-  box-sizing: border-box;
+}
+
+.black-keys {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+}
+
+.black-keys .piano-key {
+  pointer-events: auto;
 }

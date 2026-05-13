@@ -1,5 +1,5 @@
 export interface KeyboardNote {
-  src: any,
-  keyboard: string,
-  label: string
+  src: string;
+  keyboard: string;
+  label: string;
 };

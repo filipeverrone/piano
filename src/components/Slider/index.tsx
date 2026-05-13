@@ -2,11 +2,12 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Slider from '@mui/material/Slider';
+import type { SliderProps } from '@mui/material/Slider';
 import VolumeDown from '@mui/icons-material/VolumeDown';
 import VolumeUp from '@mui/icons-material/VolumeUp';
 
 interface OwnProps {
-  handleChange: (event: Event, newValue: number | number[]) => void;
+  handleChange: NonNullable<SliderProps['onChange']>;
   value: number;
 }
 
