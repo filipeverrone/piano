@@ -1,5 +1,5 @@
 import React from 'react';
-import type { SliderProps } from '@mui/material/Slider';
+import type { SliderProps } from '@mui/material';
 import './App.css';
 import ContinuousSlider from './components/Slider';
 import Piano from './pages/Piano';
